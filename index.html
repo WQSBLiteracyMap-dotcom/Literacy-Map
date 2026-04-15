@@ -1,66 +1,66 @@
-const literacyFramework = [
+<script>
+const framework = [
   {
-    code: "L1",
     domain: "Word Recognition",
-    strand: "Phonemic Awareness & Phonics"
+    strands: [
+      "Phonemic Awareness & Phonics",
+      "Recognition of Words at Sight"
+    ]
   },
   {
-    code: "L2",
-    domain: "Word Recognition",
-    strand: "Recognition of words at sight"
-  },
-
-  {
-    code: "L3",
     domain: "Bridging Processes",
-    strand: "Fluency"
+    strands: [
+      "Fluency",
+      "Vocabulary",
+      "Morphology",
+      "Strategy Use"
+    ]
   },
   {
-    code: "L4",
-    domain: "Bridging Processes",
-    strand: "Vocabulary"
-  },
-  {
-    code: "L5",
-    domain: "Bridging Processes",
-    strand: "Morphology"
-  },
-  {
-    code: "L6",
-    domain: "Bridging Processes",
-    strand: "Strategy Use"
-  },
-
-  {
-    code: "L7",
     domain: "Comprehension",
-    strand: "Background and Content Knowledge"
+    strands: [
+      "Background and Content Knowledge",
+      "Structures and Features of Text",
+      "Language Structure (syntax, semantics)"
+    ]
   },
   {
-    code: "L8",
-    domain: "Comprehension",
-    strand: "Structures and Features of Text"
-  },
-  {
-    code: "L9",
-    domain: "Comprehension",
-    strand: "Language Structure (syntax, semantics)"
-  },
-
-  {
-    code: "L10",
     domain: "Writing",
-    strand: "Transcription (Handwriting, Spelling, Punctuation)"
+    strands: [
+      "Transcription (Handwriting, Spelling, Punctuation)",
+      "Composition (Structure, Organization, Genres, Ideas, Process, Sentence Construction, Syntax, Grammar, Usage, Craft, Audience, Purpose)"
+    ]
   },
   {
-    code: "L11",
-    domain: "Writing",
-    strand: "Composition (Structure, Genres, Ideas, Process, Sentence Construction, Syntax, Grammar, Usage, Craft, Audience, Purpose)"
-  },
-
-  {
-    code: "L12",
     domain: "Talk",
-    strand: "Presentational & Exploratory Language"
+    strands: [
+      "Presentational",
+      "Exploratory"
+    ]
   }
 ];
+
+const grid = document.getElementById("grid");
+
+function render() {
+  grid.innerHTML = "";
+
+  framework.forEach(section => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    let strandsHTML = section.strands
+      .map(s => `<li>${s}</li>`)
+      .join("");
+
+    card.innerHTML = `
+      <div class="code">${section.domain}</div>
+      <ul>${strandsHTML}</ul>
+    `;
+
+    grid.appendChild(card);
+  });
+}
+
+render();
+</script>
