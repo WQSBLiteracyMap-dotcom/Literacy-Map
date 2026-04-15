@@ -1,1 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Literacy Scope & Sequence</title>
 
+<style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #f4f7f9;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #1fa2c1, #0f7fa0);
+  color: white;
+}
+
+header img {
+  height: 50px;
+}
+
+.container {
+  padding: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.code {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1fa2c1;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background: white;
+  margin: 8% auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 10px;
+}
+
+.close {
+  float: right;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="logo.png">
+  <h1>Literacy Scope & Sequence</h1>
+</header>
+
+<div class="container" id="grid"></div>
+
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">✖</span>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+const data = [
+  {
+    code: "A1",
+    grade: "1",
+    decoding: "Short a (a), d, n, t",
+    transcription: "and, at",
+    conventions: ""
+  },
+  {
+    code: "A2",
+    grade: "1",
+    decoding: "f, m, r, s",
+    transcription: "man, sat",
+    conventions: ""
+  }
+];
+
+const grid = document.getElementById("grid");
+const modal = document.getElementById("modal");
+const modalBody = document.getElementById("modalBody");
+
+function render() {
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <div class="code">${item.code}</div>
+      <div>Grade ${item.grade}</div>
+    `;
+
+    card.onclick = () => {
+      modal.style.display = "block";
+      modalBody.innerHTML = `
+        <h2>${item.code}</h2>
+        <p><b>Decoding:</b> ${item.decoding}</p>
+        <p><b>Transcription:</b> ${item.transcription}</p>
+      `;
+    };
+
+    grid.appendChild(card);
+  });
+}
+
+function closeModal() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(e) {
+  if (e.target == modal) closeModal();
+}
+
+render();
+</script>
+
+</body>
+</html>
