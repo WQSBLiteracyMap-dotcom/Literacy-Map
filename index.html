@@ -1,208 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Literacy Scope & Sequence</title>
-
-<style>
-body {
-  margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background: #f4f7f9;
-}
-
-/* HEADER */
-header {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 15px 20px;
-  background: linear-gradient(135deg, #1fa2c1, #0f7fa0);
-  color: white;
-}
-
-header img {
-  height: 50px;
-}
-
-/* GRID */
-.container {
-  padding: 15px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 12px;
-}
-
-/* CARD */
-.card {
-  background: white;
-  border-radius: 10px;
-  padding: 12px;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  transition: 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-2px);
-}
-
-/* CODE */
-.code {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #1fa2c1;
-}
-
-/* TAGS */
-.tag {
-  display: inline-block;
-  padding: 3px 6px;
-  border-radius: 4px;
-  font-size: 0.7rem;
-  color: white;
-  margin-top: 5px;
-}
-
-.decoding { background: #1fa2c1; }
-.transcription { background: #8e44ad; }
-.conventions { background: #e67e22; }
-
-/* MODAL */
-.modal {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-}
-
-.modal-content {
-  background: white;
-  margin: 8% auto;
-  padding: 20px;
-  width: 90%;
-  max-width: 600px;
-  border-radius: 10px;
-}
-
-.close {
-  float: right;
-  cursor: pointer;
-  font-size: 20px;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <img src="logo.png">
-  <h1>Literacy Scope & Sequence</h1>
-</header>
-
-<div class="container" id="grid"></div>
-
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">✖</span>
-    <div id="modalBody"></div>
-  </div>
-</div>
-
-<script>
-
-const data = [
+const literacyFramework = [
   {
-    code: "A1",
-    grade: "1",
-    decoding: "Short a (a), d, n, t — reading focus",
-    transcription: "Short a spelling (and, at)",
-    conventions: "",
+    code: "L1",
+    domain: "Word Recognition",
+    strand: "Phonemic Awareness & Phonics"
   },
   {
-    code: "A2",
-    grade: "1",
-    decoding: "f, m, r, s phonemes",
-    transcription: "CVC spelling patterns",
-    conventions: "",
+    code: "L2",
+    domain: "Word Recognition",
+    strand: "Recognition of words at sight"
+  },
+
+  {
+    code: "L3",
+    domain: "Bridging Processes",
+    strand: "Fluency"
   },
   {
-    code: "C1",
-    grade: "2",
-    decoding: "",
-    transcription: "",
-    conventions: "Capitalization: names, sentence starts, proper nouns"
+    code: "L4",
+    domain: "Bridging Processes",
+    strand: "Vocabulary"
+  },
+  {
+    code: "L5",
+    domain: "Bridging Processes",
+    strand: "Morphology"
+  },
+  {
+    code: "L6",
+    domain: "Bridging Processes",
+    strand: "Strategy Use"
+  },
+
+  {
+    code: "L7",
+    domain: "Comprehension",
+    strand: "Background and Content Knowledge"
+  },
+  {
+    code: "L8",
+    domain: "Comprehension",
+    strand: "Structures and Features of Text"
+  },
+  {
+    code: "L9",
+    domain: "Comprehension",
+    strand: "Language Structure (syntax, semantics)"
+  },
+
+  {
+    code: "L10",
+    domain: "Writing",
+    strand: "Transcription (Handwriting, Spelling, Punctuation)"
+  },
+  {
+    code: "L11",
+    domain: "Writing",
+    strand: "Composition (Structure, Genres, Ideas, Process, Sentence Construction, Syntax, Grammar, Usage, Craft, Audience, Purpose)"
+  },
+
+  {
+    code: "L12",
+    domain: "Talk",
+    strand: "Presentational & Exploratory Language"
   }
 ];
-
-const grid = document.getElementById("grid");
-const modal = document.getElementById("modal");
-const modalBody = document.getElementById("modalBody");
-
-function getTags(item) {
-  let tags = [];
-  if (item.decoding) tags.push(`<span class="tag decoding">Decoding</span>`);
-  if (item.transcription) tags.push(`<span class="tag transcription">Transcription</span>`);
-  if (item.conventions) tags.push(`<span class="tag conventions">Conventions</span>`);
-  return tags.join(" ");
-}
-
-function render() {
-  grid.innerHTML = "";
-
-  data.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "card";
-
-    card.innerHTML = `
-      <div class="code">${item.code}</div>
-      <div>Grade ${item.grade}</div>
-      <div>${getTags(item)}</div>
-    `;
-
-    card.onclick = () => openModal(item);
-
-    grid.appendChild(card);
-  });
-}
-
-function openModal(item) {
-  modal.style.display = "block";
-
-  modalBody.innerHTML = `
-    <h2>${item.code}</h2>
-
-    ${item.decoding ? `
-      <h3>🔵 Decoding</h3>
-      <p>${item.decoding}</p>
-    ` : ""}
-
-    ${item.transcription ? `
-      <h3>🟣 Transcription</h3>
-      <p>${item.transcription}</p>
-    ` : ""}
-
-    ${item.conventions ? `
-      <h3>🟠 Writing Conventions</h3>
-      <p>${item.conventions}</p>
-    ` : ""}
-  `;
-}
-
-function closeModal() {
-  modal.style.display = "none";
-}
-
-window.onclick = function(event) {
-  if (event.target == modal) closeModal();
-}
-
-render();
-
-</script>
-
-</body>
-</html>
