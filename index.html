@@ -12,6 +12,7 @@ body {
   background: #f4f7f9;
 }
 
+/* HEADER */
 header {
   display: flex;
   align-items: center;
@@ -25,6 +26,7 @@ header img {
   height: 50px;
 }
 
+/* GRID */
 .container {
   padding: 15px;
   display: grid;
@@ -32,20 +34,42 @@ header img {
   gap: 12px;
 }
 
+/* CARD */
 .card {
   background: white;
   border-radius: 10px;
   padding: 12px;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: 0.2s;
 }
 
+.card:hover {
+  transform: translateY(-2px);
+}
+
+/* CODE */
 .code {
   font-size: 1.2rem;
   font-weight: bold;
   color: #1fa2c1;
 }
 
+/* TAGS */
+.tag {
+  display: inline-block;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  color: white;
+  margin-top: 5px;
+}
+
+.decoding { background: #1fa2c1; }
+.transcription { background: #8e44ad; }
+.conventions { background: #e67e22; }
+
+/* MODAL */
 .modal {
   display: none;
   position: fixed;
@@ -67,6 +91,7 @@ header img {
 .close {
   float: right;
   cursor: pointer;
+  font-size: 20px;
 }
 </style>
 </head>
@@ -88,26 +113,42 @@ header img {
 </div>
 
 <script>
+
 const data = [
   {
     code: "A1",
     grade: "1",
-    decoding: "Short a (a), d, n, t",
-    transcription: "and, at",
-    conventions: ""
+    decoding: "Short a (a), d, n, t — reading focus",
+    transcription: "Short a spelling (and, at)",
+    conventions: "",
   },
   {
     code: "A2",
     grade: "1",
-    decoding: "f, m, r, s",
-    transcription: "man, sat",
-    conventions: ""
+    decoding: "f, m, r, s phonemes",
+    transcription: "CVC spelling patterns",
+    conventions: "",
+  },
+  {
+    code: "C1",
+    grade: "2",
+    decoding: "",
+    transcription: "",
+    conventions: "Capitalization: names, sentence starts, proper nouns"
   }
 ];
 
 const grid = document.getElementById("grid");
 const modal = document.getElementById("modal");
 const modalBody = document.getElementById("modalBody");
+
+function getTags(item) {
+  let tags = [];
+  if (item.decoding) tags.push(`<span class="tag decoding">Decoding</span>`);
+  if (item.transcription) tags.push(`<span class="tag transcription">Transcription</span>`);
+  if (item.conventions) tags.push(`<span class="tag conventions">Conventions</span>`);
+  return tags.join(" ");
+}
 
 function render() {
   grid.innerHTML = "";
@@ -119,30 +160,48 @@ function render() {
     card.innerHTML = `
       <div class="code">${item.code}</div>
       <div>Grade ${item.grade}</div>
+      <div>${getTags(item)}</div>
     `;
 
-    card.onclick = () => {
-      modal.style.display = "block";
-      modalBody.innerHTML = `
-        <h2>${item.code}</h2>
-        <p><b>Decoding:</b> ${item.decoding}</p>
-        <p><b>Transcription:</b> ${item.transcription}</p>
-      `;
-    };
+    card.onclick = () => openModal(item);
 
     grid.appendChild(card);
   });
+}
+
+function openModal(item) {
+  modal.style.display = "block";
+
+  modalBody.innerHTML = `
+    <h2>${item.code}</h2>
+
+    ${item.decoding ? `
+      <h3>🔵 Decoding</h3>
+      <p>${item.decoding}</p>
+    ` : ""}
+
+    ${item.transcription ? `
+      <h3>🟣 Transcription</h3>
+      <p>${item.transcription}</p>
+    ` : ""}
+
+    ${item.conventions ? `
+      <h3>🟠 Writing Conventions</h3>
+      <p>${item.conventions}</p>
+    ` : ""}
+  `;
 }
 
 function closeModal() {
   modal.style.display = "none";
 }
 
-window.onclick = function(e) {
-  if (e.target == modal) closeModal();
+window.onclick = function(event) {
+  if (event.target == modal) closeModal();
 }
 
 render();
+
 </script>
 
 </body>
