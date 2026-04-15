@@ -1,10 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Literacy Map</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #f4f7f9;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #1fa2c1, #0f7fa0);
+  color: white;
+}
+
+header img {
+  height: 50px;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.container {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
+.domain-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1fa2c1;
+  margin-bottom: 10px;
+}
+
+ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+li {
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="logo.png">
+  <h1>Literacy Map</h1>
+</header>
+
+<div class="container" id="grid"></div>
+
 <script>
 const framework = [
   {
     domain: "Word Recognition",
     strands: [
       "Phonemic Awareness & Phonics",
-      "Recognition of Words at Sight"
+      "Recognition of words at sight"
     ]
   },
   {
@@ -49,12 +123,12 @@ function render() {
     const card = document.createElement("div");
     card.className = "card";
 
-    let strandsHTML = section.strands
+    const strandsHTML = section.strands
       .map(s => `<li>${s}</li>`)
       .join("");
 
     card.innerHTML = `
-      <div class="code">${section.domain}</div>
+      <div class="domain-title">${section.domain}</div>
       <ul>${strandsHTML}</ul>
     `;
 
@@ -64,3 +138,6 @@ function render() {
 
 render();
 </script>
+
+</body>
+</html>
