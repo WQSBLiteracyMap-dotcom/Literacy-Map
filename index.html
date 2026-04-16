@@ -1,211 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<title>WQSB Literacy Map – Talk Domains</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
-
-<style>
-:root{
-  --primary:#1fa2c1;
-  --primary-soft:#e6f6fa;
-  --ink:#20323a;
-  --muted:#5f6f76;
-  --bg:#f4f7f9;
-  --card:#ffffff;
+/* ---------- Institution Bar ---------- */
+.institution-bar{
+  background:#0b525b;
+  color:#e6f6f8;
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  padding:.45rem 2rem;
 }
 
-/* ---------- Reset ---------- */
-*{box-sizing:border-box}
-body{
+/* ---------- Hero ---------- */
+.hero{
+  background:linear-gradient(135deg,#0b525b,#0e7490);
+  color:white;
+  padding:2.6rem 2rem;
+}
+
+.hero-inner{
+  max-width:1200px;
+  margin:auto;
+}
+
+.hero h1{
+  font-family:"Source Serif 4",serif;
+  font-size:2.3rem;
   margin:0;
-  font-family:Inter, system-ui, sans-serif;
-  background:var(--bg);
-  color:var(--ink);
 }
 
-/* ---------- Header ---------- */
-header{
+.hero p{
+  margin-top:.4rem;
+  font-size:.95rem;
+  color:#d1f1f5;
+}
+
+/* ---------- Primary Navigation ---------- */
+.primary-nav{
   display:flex;
   align-items:center;
-  gap:1rem;
-  padding:1.2rem 2rem;
+  gap:1.2rem;
   background:white;
-  border-bottom:1px solid #d9e1e6;
+  padding:.8rem 2rem;
+  border-bottom:1px solid #dbe5e8;
 }
-header img{height:60px}
-header h1{
-  font-size:1.4rem;
+
+.primary-nav button{
+  background:none;
+  border:none;
+  font-size:.85rem;
+  cursor:pointer;
+  color:#375f66;
+  padding:.35rem .1rem;
+  font-family:Inter, system-ui, sans-serif;
+}
+
+.primary-nav .nav-active{
+  color:#0e7490;
+  font-weight:600;
+  border-bottom:2px solid #0e7490;
+}
+
+.nav-spacer{
+  flex:1;
+}
+
+.print-btn{
+  background:#0e7490;
+  color:white;
+  border-radius:6px;
+  padding:.35rem .7rem;
+  font-size:.8rem;
+}
+
+/* ---------- Grade Pills ---------- */
+.grade-pills{
+  background:#f7fbfc;
+  padding:1rem 2rem 1.4rem;
+  display:flex;
+  gap:.6rem;
+  flex-wrap:wrap;
+}
+
+.pill{
+  padding:.42rem .95rem;
+  border-radius:999px;
+  background:#e6f6f8;
+  font-size:.75rem;
+  color:#0b525b;
+  cursor:pointer;
+}
+
+.pill.active{
+  background:#ffffff;
+  border:2px solid #0e7490;
   font-weight:600;
 }
 
-/* ---------- Tabs ---------- */
-.tabs{
-  display:flex;
-  gap:.5rem;
-  padding:.8rem 2rem;
-  background:white;
-  border-bottom:1px solid #d9e1e6;
-}
-.tab{
-  padding:.5rem .9rem;
-  border-radius:20px;
-  font-size:.85rem;
-  font-weight:500;
-  cursor:pointer;
-  background:transparent;
-  border:1px solid transparent;
-  color:var(--muted);
-}
-.tab.active{
-  background:var(--primary-soft);
-  border-color:var(--primary);
-  color:var(--primary);
-}
-
-/* ---------- Filters ---------- */
-.filters{
-  display:flex;
-  gap:1.5rem;
-  padding:1rem 2rem;
-  background:white;
-  border-bottom:1px solid #d9e1e6;
-  font-size:.85rem;
-}
-.filters label{
-  cursor:pointer;
-}
-
-/* ---------- Layout ---------- */
-main{
-  max-width:1100px;
-  margin:2rem auto;
-  padding:0 2rem;
-}
-
-/* ---------- Grade Cards ---------- */
-.grade{
-  background:var(--card);
-  border-radius:12px;
-  padding:2rem;
-  margin-bottom:2rem;
-  box-shadow:0 6px 18px rgba(0,0,0,.05);
-}
-.grade h2{
-  margin-top:0;
-  font-size:1.4rem;
-  border-bottom:3px solid var(--primary);
-  padding-bottom:.3rem;
-}
-
-/* ---------- Domains ---------- */
-.domain{
-  margin-top:1.6rem;
-  padding-left:1rem;
-  border-left:4px solid var(--primary-soft);
-}
-.domain.presentational{
-  border-left-color:var(--primary);
-}
-.domain h3{
-  margin-top:0;
-  font-size:1.1rem;
-  color:var(--primary);
-}
-
-/* ---------- Content ---------- */
-.domain p{
-  margin:.35rem 0;
-  font-family:"Source Serif 4", serif;
-  font-size:1rem;
-}
-
-/* ---------- Hide ---------- */
-.hide{display:none}
-
 /* ---------- Print ---------- */
 @media print{
-  .tabs,.filters{display:none}
-  body{background:white}
-  main{margin:0;padding:0}
-  .grade{box-shadow:none;page-break-inside:avoid}
+  .primary-nav,
+  .grade-pills{
+    display:none;
+  }
 }
-</style>
-</head>
-
-<body>
-
-<header>
-  <img src="logo.png" alt="WQSB Literacy">
-  <h1>Talk Domains – Scope and Sequence</h1>
-</header>
-
-<div class="tabs">
-  <div class="tab active">All Grades</div>
-</div>
-
-<div class="filters">
-  <strong>Domains:</strong>
-  <label><input type="checkbox" checked onchange="toggleDomain('exploratory')"> Exploratory Talk</label>
-  <label><input type="checkbox" checked onchange="toggleDomain('presentational')"> Presentational Talk</label>
-
-  <strong>Grades:</strong>
-  <label><input type="checkbox" checked onchange="toggleGrade('1')"> 1</label>
-  <label><input type="checkbox" checked onchange="toggleGrade('2')"> 2</label>
-  <label><input type="checkbox" checked onchange="toggleGrade('3')"> 3</label>
-  <label><input type="checkbox" checked onchange="toggleGrade('4')"> 4</label>
-  <label><input type="checkbox" checked onchange="toggleGrade('5')"> 5</label>
-  <label><input type="checkbox" checked onchange="toggleGrade('6')"> 6</label>
-
-  <button onclick="window.print()">Print</button>
-</div>
-
-<main>
-
-<!-- GRADE 1 -->
-<section class="grade grade-1">
-<h2>Grade 1</h2>
-
-<div class="domain exploratory">
-<h3>Exploratory Talk</h3>
-<p><strong>Uses talk to explore learning and thinking</strong> → Thinks aloud during problem solving.</p>
-<p><strong>Shares opinions and simple explanations</strong> → Uses “I think…” or “Because…”</p>
-<p><strong>Participates in partner and small‑group discussions</strong> → Turn‑and‑talks, guided group talk.</p>
-<p><strong>Asks questions to clarify understanding</strong> → “Why?” “How did you know?”</p>
-<p><strong>Reflects on self as a speaker and listener (with guidance)</strong> → “I listened.” “I spoke louder.”</p>
-</div>
-
-<div class="domain presentational">
-<h3>Presentational Talk</h3>
-<p><strong>Retells stories or experiences in sequence</strong> → Uses “first, then, last.”</p>
-<p><strong>Delivers short, rehearsed messages</strong> → Practices before sharing.</p>
-<p><strong>Uses basic voice control and gestures</strong> → Faces audience; uses hands naturally.</p>
-</div>
-</section>
-
-<!-- Grades 2–6 omitted here for brevity
-     (They are identical to the version you approved previously and can be
-      dropped in without any styling changes) -->
-
-</main>
-
-<script>
-function toggleDomain(domain){
-  document.querySelectorAll('.' + domain).forEach(el=>{
-    el.classList.toggle('hide');
-  });
-}
-function toggleGrade(grade){
-  document.querySelectorAll('.grade-' + grade).forEach(el=>{
-    el.classList.toggle('hide');
-  });
-}
-</script>
-
-</body>
-</html>
