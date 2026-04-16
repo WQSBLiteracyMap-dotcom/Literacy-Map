@@ -1,237 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WQSB Literacy Map</title>
+<meta charset="UTF-8" />
+<title>WQSB Literacy Scope and Sequence</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <style>
-    body {
-      margin: 0;
-      font-family: "Segoe UI", sans-serif;
-      background: #f4f7f9;
-    }
+<style>
+/* ---------- VARIABLES ---------- */
+:root{
+  --primary:#1fa2c1;
+  --secondary:#4cc9f0;
+  --ink:#2b2b2b;
+  --muted:#666;
+  --bg:#f6f8fa;
+}
 
-    /* HEADER */
-    header {
-      background: white;
-      padding: 12px 25px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      border-bottom: 1px solid #ddd;
-    }
+/* ---------- BASE ---------- */
+body{
+  margin:0;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+}
 
-    header img {
-      height: 50px;
-    }
+h1,h2,h3{
+  font-weight:600;
+}
 
-    h1 {
-      font-size: 1.3rem;
-      margin: 0;
-      color: #333;
-    }
+h1{
+  font-size:1.6rem;
+}
 
-    /* ACCENT BAR */
-    .accent-bar {
-      height: 5px;
-      background: linear-gradient(90deg, #1fa2c1, #4cc9f0);
-    }
+h2{
+  margin-top:2rem;
+  border-bottom:3px solid var(--primary);
+  padding-bottom:.3rem;
+}
 
-    /* NAV */
-    .nav {
-      display: flex;
-      gap: 8px;
-      padding: 10px 20px;
-      background: #ffffff;
-      border-bottom: 1px solid #ddd;
-    }
+h3{
+  margin-top:1.5rem;
+  color:var(--primary);
+}
 
-    .tab {
-      padding: 8px 14px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      color: #555;
-    }
+p{
+  margin:.3rem 0;
+}
 
-    .tab.active {
-      background: #1fa2c1;
-      color: white;
-    }
+/* ---------- HEADER ---------- */
+header{
+  background:white;
+  border-bottom:1px solid #ddd;
+  padding:1rem 2rem;
+}
 
-    /* CONTENT */
-    .container {
-      padding: 20px;
-    }
+header img{
+  height:60px;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-    }
+/* ---------- NAV ---------- */
+nav{
+  display:flex;
+  gap:1rem;
+  background:white;
+  padding:.8rem 2rem;
+  border-bottom:1px solid #ddd;
+}
 
-    .card {
-      border-radius: 12px;
-      padding: 16px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.06);
-      background: white;
-    }
+button{
+  border:none;
+  background:none;
+  font-size:.95rem;
+  cursor:pointer;
+  padding:.4rem .8rem;
+  border-radius:6px;
+}
 
-    .word { background: #e8f7fa; }
-    .bridge { background: #eef7f0; }
-    .comp { background: #f3f0ff; }
-    .write { background: #fff4e6; }
-    .talk { background: #fdeef4; }
+button.active{
+  background:var(--primary);
+  color:white;
+}
 
-    .domain-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
+/* ---------- LAYOUT ---------- */
+main{
+  max-width:1200px;
+  margin:auto;
+  padding:2rem;
+}
 
-    ul {
-      margin: 6px 0 0 18px;
-      padding: 0;
-    }
+.view{
+  display:none;
+}
 
-    li {
-      margin-bottom: 6px;
-      font-size: 0.95rem;
-    }
+.view.active{
+  display:block;
+}
 
-    .view {
-      display: none;
-    }
+/* ---------- TABLE ---------- */
+table{
+  border-collapse:collapse;
+  width:100%;
+  margin-top:1rem;
+  background:white;
+}
 
-    .view.active {
-      display: block;
-    }
+th,td{
+  border:1px solid #ccc;
+  padding:.6rem;
+  vertical-align:top;
+}
 
-    hr {
-      margin: 12px 0;
-    }
+th{
+  background:#eef7fa;
+}
 
-    .small {
-      font-size: 0.8rem;
-      color: #555;
-    }
-  </style>
+/* ---------- PRINT ---------- */
+@media print{
+  nav{display:none;}
+  body{background:white;}
+  main{padding:0;}
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>Western Quebec School Board Literacy Map</h1>
+  <img src="logo.png" alt="WQSB Literacy" />
 </header>
 
-<div class="accent-bar"></div>
+<nav>
+  <button class="active" onclick="showView('grade',this)">By Grade</button>
+  <button onclick="showView('strand',this)">By Strand</button>
+  <button onclick="showView('all',this)">All Expectations</button>
+  <button onclick="window.print()">Print</button>
+</nav>
 
-<div class="nav">
-  <div class="tab active" onclick="showView('overview', this)">Overview</div>
-  <div class="tab" onclick="showView('grade', this)">By Grade</div>
-  <div class="tab" onclick="showView('skills', this)">By Skills & Content</div>
-</div>
+<main>
 
-<div class="container">
+<!-- ================= BY GRADE ================= -->
+<section id="grade" class="view active">
+<h2>Talk – By Grade</h2>
 
-  <div id="overview" class="view active">
-    <div class="grid" id="overviewGrid"></div>
-  </div>
+<h3>Grade 1 – Exploratory Talk</h3>
+<p><strong>Uses talk to explore learning and thinking</strong>→ Thinks aloud during problem solving.</p>
+<p><strong>Shares opinions and simple explanations</strong>→ Uses “I think…” or “Because…”</p>
+<p><strong>Participates in partner and small‑group discussions</strong>→ Turn‑and‑talks, guided group talk.</p>
+<p><strong>Asks questions to clarify understanding</strong>→ “Why?” “How did you know?”</p>
+<p><strong>Reflects on self as a speaker and listener (with guidance)</strong>→ “I listened.” “I spoke louder.”</p>
 
-  <div id="grade" class="view">
-    <div class="grid" id="gradeGrid"></div>
-  </div>
+<h3>Grade 1 – Presentational Talk</h3>
+<p><strong>Retells stories or experiences in sequence</strong>→ Uses “first, then, last.”</p>
+<p><strong>Delivers short, rehearsed messages</strong>→ Practices before sharing.</p>
+<p><strong>Uses basic voice control and gestures</strong>→ Faces audience; uses hands naturally.</p>
 
-  <div id="skills" class="view">
-    <div class="grid" id="skillsGrid"></div>
-  </div>
+<hr>
 
-</div>
+<h3>Grade 4 – Presentational Talk (Signature Context: Interviewing)</h3>
+<p><strong>Plans and conducts interviews</strong>→ Interviews peers, adults, or characters.</p>
+<p><strong>Asks purposeful questions</strong>→ Questions aligned with topic and goal.</p>
+<p><strong>Adjusts tone, language, and register</strong>→ Polite, clear interview language.</p>
+<p><strong>Organizes information for oral presentation</strong>→ Summarizes findings clearly.</p>
+
+</section>
+
+<!-- ================= BY STRAND ================= -->
+<section id="strand" class="view">
+<h2>Presentational Talk – All Grades</h2>
+
+<p><strong>Grade 1:</strong> Retells stories or experiences in sequence → Uses “first, then, last.”</p>
+<p><strong>Grade 2:</strong> Prepares short oral presentations → Presents learning from reading or inquiry.</p>
+<p><strong>Grade 3:</strong> Delivers short, structured presentations → Shares prepared information clearly.</p>
+<p><strong>Grade 4:</strong> Signature Context: Interviewing</p>
+<p><strong>Grade 5:</strong> Signature Context: Explaining Mathematical and Scientific Thinking</p>
+<p><strong>Grade 6:</strong> Signature Context: Explaining Processes and Reasoning</p>
+</section>
+
+<!-- ================= ALL TABLE ================= -->
+<section id="all" class="view">
+<h2>All Talk Expectations</h2>
+
+<table>
+<tr>
+<th>Strand</th>
+<th>Grade 1</th>
+<th>Grade 2</th>
+<th>Grade 3</th>
+<th>Grade 4</th>
+<th>Grade 5</th>
+<th>Grade 6</th>
+</tr>
+
+<tr>
+<td>Exploratory Talk</td>
+<td>Uses talk to explore learning and thinking</td>
+<td>Builds on others’ ideas during discussion</td>
+<td>Explores multiple ideas and viewpoints</td>
+<td>Sustains discussion to co‑construct meaning</td>
+<td>Engages in sustained academic dialogue</td>
+<td>Leads and participates in sustained inquiry discussions</td>
+</tr>
+
+<tr>
+<td>Presentational Talk</td>
+<td>Retells stories or experiences</td>
+<td>Prepares short oral presentations</td>
+<td>Delivers short, structured presentations</td>
+<td>Signature Context: Interviewing</td>
+<td>Explaining Mathematical and Scientific Thinking</td>
+<td>Explaining Processes and Reasoning</td>
+</tr>
+
+</table>
+</section>
+
+</main>
 
 <script>
-/* ================= OVERVIEW ================= */
-const framework = [
-  { domain: "Word Recognition", class: "word", icon: "🔤", strands: ["Phonemic Awareness & Phonics", "Sight Word Recognition"] },
-  { domain: "Bridging Processes", class: "bridge", icon: "🔗", strands: ["Fluency", "Vocabulary", "Morphology", "Strategy Use"] },
-  { domain: "Comprehension", class: "comp", icon: "📖", strands: ["Background Knowledge", "Text Structures", "Language Structures"] },
-  { domain: "Writing", class: "write", icon: "✏️", strands: ["Transcription", "Composition"] },
-  { domain: "Talk", class: "talk", icon: "🗣", strands: ["Exploratory Talk 🧠", "Presentational Talk 🎤"] }
-];
+function showView(id,btn){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 
-const talkByGrade = [
-  {
-    grade: "Kindergarten",
-    exploratory: ["Sharing ideas and feelings", "Play-based talk", "Responding with words or gestures"],
-    exploratoryExamples: ["Circle time talk", "Songs and chants"],
-    presentational: ["Speaking clearly to a group", "Sharing simple information"],
-    presentationalExamples: ["Show-and-tell", "Oral greetings"]
-  },
-  {
-    grade: "Grade 4",
-    exploratory: ["Sustaining discussion", "Planning with talk"],
-    exploratoryExamples: ["Inquiry discussions"],
-    presentational: ["Interviewing", "Presenting gathered information"],
-    presentationalExamples: ["Student interviews", "Interview reports"]
-  }
-];
-
-function renderOverview() {
-  const g = document.getElementById("overviewGrid");
-  framework.forEach(f => {
-    g.innerHTML += `
-      <div class="card ${f.class}">
-        <div class="domain-header">${f.icon} ${f.domain}</div>
-        <ul>${f.strands.map(s=>`<li>${s}</li>`).join("")}</ul>
-      </div>`;
-  });
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
 }
-
-function renderSkills() {
-  const g = document.getElementById("skillsGrid");
-  framework.forEach(f => {
-    f.strands.forEach(s => {
-      g.innerHTML += `
-        <div class="card ${f.class}">
-          <div class="domain-header">${f.icon} ${s}</div>
-          <div class="small">${f.domain}</div>
-        </div>`;
-    });
-  });
-}
-
-function renderGrades() {
-  const g = document.getElementById("gradeGrid");
-  talkByGrade.forEach(t => {
-    g.innerHTML += `
-      <div class="card talk">
-        <div class="domain-header">🗣 ${t.grade} – Talk</div>
-
-        <strong>🧠 Exploratory Talk</strong>
-        <ul>${t.exploratory.map(x=>`<li>${x}</li>`).join("")}</ul>
-        <div class="small"><strong>Examples:</strong> ${t.exploratoryExamples.join(", ")}</div>
-
-        <hr>
-
-        <strong>🎤 Presentational Talk</strong>
-        <ul>${t.presentational.map(x=>`<li>${x}</li>`).join("")}</ul>
-        <div class="small"><strong>Examples:</strong> ${t.presentationalExamples.join(", ")}</div>
-      </div>`;
-  });
-}
-
-function showView(id, el) {
-  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
-  el.classList.add("active");
-}
-
-renderOverview();
-renderSkills();
-renderGrades();
 </script>
 
 </body>
