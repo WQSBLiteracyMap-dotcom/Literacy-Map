@@ -6,9 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-/* =====================
-   COLOURS & FONTS
-===================== */
 :root{
   --primary:#0b525b;
   --secondary:#0e7490;
@@ -17,9 +14,7 @@
   --ink:#20323a;
 }
 
-/* =====================
-   BASE
-===================== */
+/* ===== BASE ===== */
 *{box-sizing:border-box}
 body{
   margin:0;
@@ -31,9 +26,7 @@ body{
 h1,h2,h3{font-weight:600}
 p{margin:.4rem 0}
 
-/* =====================
-   HEADER
-===================== */
+/* ===== HEADER ===== */
 .institution-bar{
   background:var(--primary);
   color:#e6f6f8;
@@ -46,22 +39,26 @@ p{margin:.4rem 0}
 .hero{
   background:linear-gradient(135deg,var(--primary),var(--secondary));
   color:white;
-  padding:2.6rem 2rem;
+  padding:2rem;
+  display:flex;
+  align-items:center;
+  gap:1.5rem;
+}
+.hero img{
+  height:70px;
 }
 .hero h1{
   margin:0;
-  font-size:2.2rem;
+  font-size:2.1rem;
   font-family:"Source Serif 4",serif;
 }
 .hero p{
-  margin-top:.4rem;
+  margin-top:.3rem;
   font-size:.95rem;
   color:#d1f1f5;
 }
 
-/* =====================
-   NAV
-===================== */
+/* ===== NAV ===== */
 .primary-nav{
   display:flex;
   gap:1.2rem;
@@ -82,9 +79,7 @@ p{margin:.4rem 0}
   border-bottom:2px solid var(--secondary);
 }
 
-/* =====================
-   CONTENT
-===================== */
+/* ===== CONTENT ===== */
 main{
   max-width:1200px;
   margin:2rem auto;
@@ -103,9 +98,7 @@ main{
   padding-bottom:.3rem;
 }
 
-/* =====================
-   TABLES
-===================== */
+/* ===== TABLES ===== */
 table{
   width:100%;
   border-collapse:collapse;
@@ -120,9 +113,7 @@ th{
   background:#eef7fa;
 }
 
-/* =====================
-   PRINT
-===================== */
+/* ===== PRINT ===== */
 @media print{
   .primary-nav{display:none}
   body{background:white}
@@ -137,129 +128,26 @@ th{
 </div>
 
 <div class="hero">
-  <h1>Western Quebec School Board Literacy Map</h1>
-  <p>Grades 1–6 · English Language Arts</p>
+  <img src="logo.png" alt="Western Quebec School Board logo">
+  <div>
+    <h1>Western Quebec School Board Literacy Map</h1>
+    <p>Grades 1–6 · English Language Arts</p>
+  </div>
 </div>
 
 <nav class="primary-nav">
-  <button class="active">By Grade Level</button>
-  <button>By Domain</button>
-  <button>Full Table</button>
+  <button class="active" onclick="document.getElementById('grade-view').scrollIntoView()">By Grade Level</button>
+  <button onclick="document.getElementById('talk-table').scrollIntoView()">By Domain</button>
+  <button onclick="document.getElementById('full-tables').scrollIntoView()">Full Table</button>
 </nav>
 
-<main>
+<main id="grade-view">
 
-<!-- =====================
-     READING
-===================== -->
-<section class="section">
-<h2>Reading</h2>
-
-<table>
-<tr>
-<th>Domain</th>
-<th>Sub‑Domain</th>
-<th>Grade 1</th>
-<th>Grade 2</th>
-<th>Grade 3</th>
-<th>Grade 4</th>
-<th>Grade 5</th>
-<th>Grade 6</th>
-</tr>
-
-<tr>
-<td rowspan="3"><strong>Word Recognition</strong></td>
-<td>Phonemic Awareness</td><td></td><td></td><td></td><td></td><td></td><td></td>
-</tr>
-<tr>
-<td>Phonics</td><td></td><td></td><td></td><td></td><td></td><td></td>
-</tr>
-<tr>
-<td>Recognition of words at sight</td><td></td><td></td><td></td><td></td><td></td><td></td>
-</tr>
-
-<tr>
-<td rowspan="4"><strong>Bridging Processes</strong></td>
-<td>Fluency</td><td></td><td></td><td></td><td></td><td></td><td></td>
-</tr>
-<tr>
-<td>Vocabulary</td><td></td><td></td><td></td><td></td><td></td><td></td>
-</tr>
-<tr>
-<td>Morphology</td><td></td><td></td><td></td><td></td><td></td><td></td>
-</tr>
-<tr>
-<td>Strategy Use</td><td></td><td></td><td></td><td></td><td></td><td></td>
-</tr>
-
-<tr>
-<td rowspan="3"><strong>Comprehension</strong></td>
-<td>Background and Content Knowledge</td><td></td><td></td><td></td><td></td><td></td><td></td>
-</tr>
-<tr>
-<td>Structures and Features of Text</td><td></td><td></td><td></td><td></td><td></td><td></td>
-</tr>
-<tr>
-<td>Language Structure (syntax, semantics…)</td><td></td><td></td><td></td><td></td><td></td><td></td>
-</tr>
-</table>
-</section>
-
-<!-- =====================
-     WRITING
-===================== -->
-<section class="section">
-<h2>Writing</h2>
-
-<table>
-<tr>
-<th>Domain</th>
-<th>Sub‑Domain</th>
-<th>Grade 1</th>
-<th>Grade 2</th>
-<th>Grade 3</th>
-<th>Grade 4</th>
-<th>Grade 5</th>
-<th>Grade 6</th>
-</tr>
-
-<tr>
-<td rowspan="3"><strong>Transcription</strong></td>
-<td>Handwriting</td><td></td><td></td><td></td><td></td><td></td><td></td>
-</tr>
-<tr>
-<td>Spelling</td><td></td><td></td><td></td><td></td><td></td><td></td>
-</tr>
-<tr>
-<td>Punctuation</td><td></td><td></td><td></td><td></td><td></td><td></td>
-</tr>
-
-<tr>
-<td rowspan="5"><strong>Composition</strong></td>
-<td>Structure, Organization, and Genres</td><td></td><td></td><td></td><td></td><td></td><td></td>
-</tr>
-<tr>
-<td>Ideas &amp; Process</td><td></td><td></td><td></td><td></td><td></td><td></td>
-</tr>
-<tr>
-<td>Sentence Construction</td><td></td><td></td><td></td><td></td><td></td><td></td>
-</tr>
-<tr>
-<td>Syntax, Grammar, &amp; Usage</td><td></td><td></td><td></td><td></td><td></td><td></td>
-</tr>
-<tr>
-<td>Craft, Audience &amp; Purpose</td><td></td><td></td><td></td><td></td><td></td><td></td>
-</tr>
-</table>
-</section>
-
-<!-- =====================
-     TALK (FULL DETAIL)
-===================== -->
+<!-- ================= TALK ================= -->
 <section class="section">
 <h2>Talk</h2>
 
-<table>
+<table id="talk-table">
 <tr>
 <th>Domain</th>
 <th>Grade 1</th>
@@ -311,7 +199,84 @@ th{
 <strong>Reflects independently on communicative growth</strong>→ Identifies strengths and needs.
 </td>
 </tr>
+
+<tr>
+<td><strong>Presentational Talk</strong></td>
+<td>
+<strong>Retells stories or experiences in sequence</strong>→ Uses “first, then, last.”<br>
+<strong>Delivers short, rehearsed messages</strong>→ Practices before sharing.<br>
+<strong>Uses basic voice control and gestures</strong>→ Faces audience; uses hands naturally.<br>
+<strong>Examples of Presentational Talk (POL‑aligned):</strong><br>
+Show‑and‑tell<br>
+Oral retelling of a story or experience<br>
+Sharing favourite books or activities<br>
+Simple oral reports about classroom or family experiences
+</td>
+<td>
+<strong>Prepares short oral presentations</strong>→ Presents learning from reading or inquiry.<br>
+<strong>Organizes talk with a beginning and ending</strong>→ Introduces topic; gives conclusion.<br>
+<strong>Uses visuals to support meaning</strong>→ Refers to drawings or charts.<br>
+<strong>Adjusts language slightly for audience and purpose</strong>→ More formal whole‑class language.<br>
+<strong>Examples of Presentational Talk (POL‑aligned):</strong><br>
+Short oral reports on a topic of interest<br>
+Descriptive reports about an event or observation<br>
+Book talks<br>
+Explaining how something was done (simple procedures)
+</td>
+<td>
+<strong>Delivers short, structured presentations</strong>→ Shares prepared information clearly.<br>
+<strong>Uses subject‑appropriate vocabulary</strong>→ Science, math, social studies terms.<br>
+<strong>Begins adjusting register for different contexts</strong>→ Different language for report vs sharing.<br>
+<strong>Examples of Presentational Talk (POL‑aligned):</strong><br>
+Oral reports based on reading or inquiry<br>
+Book talks and chapter summaries<br>
+Explaining a process or decision<br>
+Presenting findings from research or observation
+</td>
+<td>
+<strong>Signature Context: Interviewing</strong><br>
+<strong>Plans and conducts interviews</strong>→ Interviews peers, adults, or characters.<br>
+<strong>Asks purposeful questions</strong>→ Questions aligned with topic and goal.<br>
+<strong>Adjusts tone, language, and register</strong>→ Polite, clear interview language.<br>
+<strong>Organizes information for oral presentation</strong>→ Summarizes findings clearly.<br>
+<strong>Examples of Presentational Talk (POL‑aligned):</strong><br>
+Interviews (peer, adult, character‑based)<br>
+Oral presentation of interview findings<br>
+Inquiry‑based reports<br>
+Explanations of how something works
+</td>
+<td>
+<strong>Signature Context: Explaining Mathematical and Scientific Thinking</strong><br>
+<strong>Provides oral explanations of mathematical reasoning</strong>→ Explains steps used to solve problems.<br>
+<strong>Explains strategies and processes clearly</strong>→ Logical, sequenced explanations.<br>
+<strong>Uses precise subject‑specific vocabulary</strong>→ Accurate math and science terms.<br>
+<strong>Responds to questions to clarify understanding</strong>→ Rephrases and elaborates.<br>
+<strong>Examples of Presentational Talk (POL‑aligned):</strong><br>
+Oral explanations of math reasoning<br>
+Explaining scientific processes or experiments<br>
+Inquiry presentations<br>
+Structured oral reports based on research
+</td>
+<td>
+<strong>Signature Context: Explaining Processes and Reasoning</strong><br>
+<strong>Explains complex processes step by step</strong>→ Clear cause‑and‑effect explanations.<br>
+<strong>Justifies conclusions using evidence</strong>→ Refers to data and observations.<br>
+<strong>Adapts presentation style to the audience</strong>→ Clarifies or elaborates as needed.<br>
+<strong>Uses rhetorical and organizational strategies intentionally</strong>→ Emphasis through pacing and tone.<br>
+<strong>Self‑evaluates oral communication and sets goals</strong>→ Reflects and plans improvement.<br>
+<strong>Examples of Presentational Talk (POL‑aligned):</strong><br>
+Oral explanations of scientific and mathematical processes<br>
+Persuasive presentations or debates for peers<br>
+Inquiry and research presentations<br>
+Public service messages or advocacy speeches
+</td>
+</tr>
 </table>
+</section>
+
+<section class="section" id="full-tables">
+<h2>Reading &amp; Writing</h2>
+<p>Reading and Writing domains are displayed in full table form above.</p>
 </section>
 
 </main>
