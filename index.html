@@ -1,270 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WQSB Literacy Map</title>
-
-<style>
-body {
-  margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background: #f4f7f9;
-}
-
-/* HEADER */
-header {
-  background: white;
-  padding: 12px 25px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  border-bottom: 1px solid #ddd;
-}
-
-header img {
-  height: 50px;
-}
-
-h1 {
-  font-size: 1.3rem;
-  margin: 0;
-  color: #333;
-}
-
-/* ACCENT BAR */
-.accent-bar {
-  height: 5px;
-  background: linear-gradient(90deg, #1fa2c1, #4cc9f0);
-}
-
-/* NAV */
-.nav {
-  display: flex;
-  gap: 8px;
-  padding: 10px 20px;
-  background: #ffffff;
-  border-bottom: 1px solid #ddd;
-}
-
-.tab {
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  color: #555;
-}
-
-.tab.active {
-  background: #1fa2c1;
-  color: white;
-}
-
-/* CONTENT */
-.container {
-  padding: 20px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-}
-
-/* CARDS */
-.card {
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.06);
-  background: white;
-  transition: 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-3px);
-}
-
-/* DOMAIN COLORS */
-.word { background: #e8f7fa; }
-.bridge { background: #eef7f0; }
-.comp { background: #f3f0ff; }
-.write { background: #fff4e6; }
-.talk { background: #fdeef4; }
-
-.domain-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.icon {
-  font-size: 1.2rem;
-}
-
-ul {
-  margin: 0;
-  padding-left: 18px;
-}
-
-li {
-  margin-bottom: 6px;
-  font-size: 0.95rem;
-}
-
-/* VIEW CONTROL */
-.view {
-  display: none;
-}
-
-.view.active {
-  display: block;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <img src="logo.png">
-  <h1>Western Quebec School Board Literacy Map</h1>
-</header>
-
-<div class="accent-bar"></div>
-
-<div class="nav">
-  <div class="tab active" onclick="showView('overview')">Overview</div>
-  <div class="tab" onclick="showView('grade')">By Grade</div>
-  <div class="tab" onclick="showView('skills')">By Skills & Content</div>
-</div>
-
-<div class="container">
-
-  <div id="overview" class="view active">
-    <div class="grid" id="overviewGrid"></div>
-  </div>
-
-  <div id="grade" class="view">
-    <p>Grade-level view coming next.</p>
-  </div>
-
-  <div id="skills" class="view">
-    <div class="grid" id="skillsGrid"></div>
-  </div>
-
-</div>
-
 <script>
-const framework = [
+const talkByGrade = [
   {
-    domain: "Word Recognition",
-    class: "word",
-    icon: "🔤",
-    strands: [
-      "Phonemic Awareness & Phonics",
-      "Recognition of words at sight"
-    ]
+    grade: "Kindergarten",
+    exploratory: {
+      icon: "🧠",
+      points: [
+        "Shares ideas, feelings, needs, and preferences",
+        "Participates in play-based conversations",
+        "Responds using words, gestures, or actions"
+      ],
+      examples: [
+        "Circle time sharing",
+        "Partner talk during centres",
+        "Songs, chants, and shared retellings"
+      ]
+    },
+    presentational: {
+      icon: "🎤",
+      points: [
+        "Shares simple information about self",
+        "Attempts to speak clearly to a small group"
+      ],
+      polExamples: [
+        "Show-and-tell",
+        "Sharing a personal object",
+        "Oral greeting or thank-you"
+      ]
+    }
   },
   {
-    domain: "Bridging Processes",
-    class: "bridge",
-    icon: "🔗",
-    strands: [
-      "Fluency",
-      "Vocabulary",
-      "Morphology",
-      "Strategy Use"
-    ]
-  },
-  {
-    domain: "Comprehension",
-    class: "comp",
-    icon: "📖",
-    strands: [
-      "Background and Content Knowledge",
-      "Structures and Features of Text",
-      "Language Structure (syntax, semantics)"
-    ]
-  },
-  {
-    domain: "Writing",
-    class: "write",
-    icon: "✏️",
-    strands: [
-      "Transcription (Handwriting, Spelling, Punctuation)",
-      "Composition (Structure, Organization, Genres, Ideas, Process, Sentence Construction, Syntax, Grammar, Usage, Craft, Audience, Purpose)"
-    ]
-  },
-  {
-    domain: "Talk",
-    class: "talk",
-    icon: "🗣",
-    strands: [
-      "Presentational",
-      "Exploratory"
-    ]
-  }
-];
-
-function renderOverview() {
-  const grid = document.getElementById("overviewGrid");
-  grid.innerHTML = "";
-
-  framework.forEach(section => {
-    const card = document.createElement("div");
-    card.className = `card ${section.class}`;
-
-    const strandsHTML = section.strands
-      .map(s => `<li>${s}</li>`)
-      .join("");
-
-    card.innerHTML = `
-      <div class="domain-header">
-        <span class="icon">${section.icon}</span>
-        ${section.domain}
-      </div>
-      <ul>${strandsHTML}</ul>
-    `;
-
-    grid.appendChild(card);
-  });
-}
-
-function renderSkills() {
-  const grid = document.getElementById("skillsGrid");
-  grid.innerHTML = "";
-
-  framework.forEach(section => {
-    section.strands.forEach(strand => {
-      const card = document.createElement("div");
-      card.className = `card ${section.class}`;
-
-      card.innerHTML = `
-        <div class="domain-header">
-          <span class="icon">${section.icon}</span>
-          ${strand}
-        </div>
-        <div style="font-size: 0.8rem; color: #555;">${section.domain}</div>
-      `;
-
-      grid.appendChild(card);
-    });
-  });
-}
-
-function showView(viewId) {
-  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
-  document.getElementById(viewId).classList.add("active");
-
-  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-  event.target.classList.add("active");
-}
-
-renderOverview();
-renderSkills();
-</script>
-
-</body>
-</html>
+    grade: "Grade 4",
+    exploratory: {
+      icon: "🧠",
+      points: [
+        "Sustains discussion to co-construct meaning",
+        "Uses talk to plan and problem-solve",
+        "Responds thoughtfully to peers"
+      ],
+      examples: [
+        "Collaborative inquiry discussions",
+        "Planning tasks aloud with peers"
+      ]
+    },
+    presentational: {
+      icon: "🎤",
+      points: [
