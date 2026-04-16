@@ -1,208 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WQSB Literacy Map</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #f4f7f9;
+    }
+
+    /* HEADER */
+    header {
+      background: white;
+      padding: 12px 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    h1 {
+      font-size: 1.3rem;
+      margin: 0;
+      color: #333;
+    }
+
+    /* ACCENT BAR */
+    .accent-bar {
+      height: 5px;
+      background: linear-gradient(90deg, #1fa2c1, #4cc9f0);
+    }
+
+    /* NAV */
+    .nav {
+      display: flex;
+      gap: 8px;
+      padding: 10px 20px;
+      background: #ffffff;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .tab {
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .tab.active {
+      background: #1fa2c1;
+      color: white;
+    }
+
+    /* CONTENT */
+    .container {
+      padding: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+      background: white;
+    }
+
+    .word { background: #e8f7fa; }
+    .bridge { background: #eef7f0; }
+    .comp { background: #f3f0ff; }
+    .write { background: #fff4e6; }
+    .talk { background: #fdeef4; }
+
+    .domain-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      margin: 6px 0 0 18px;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+
+    .view {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    hr {
+      margin: 12px 0;
+    }
+
+    .small {
+      font-size: 0.8rem;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Western Quebec School Board Literacy Map</h1>
+</header>
+
+<div class="accent-bar"></div>
+
+<div class="nav">
+  <div class="tab active" onclick="showView('overview', this)">Overview</div>
+  <div class="tab" onclick="showView('grade', this)">By Grade</div>
+  <div class="tab" onclick="showView('skills', this)">By Skills & Content</div>
+</div>
+
+<div class="container">
+
+  <div id="overview" class="view active">
+    <div class="grid" id="overviewGrid"></div>
+  </div>
+
+  <div id="grade" class="view">
+    <div class="grid" id="gradeGrid"></div>
+  </div>
+
+  <div id="skills" class="view">
+    <div class="grid" id="skillsGrid"></div>
+  </div>
+
+</div>
+
 <script>
-// ===============================
-// MAIN FRAMEWORK (Overview + Skills)
-// ===============================
+/* ================= OVERVIEW ================= */
 const framework = [
-  {
-    domain: "Word Recognition",
-    class: "word",
-    icon: "🔤",
-    strands: [
-      "Phonemic Awareness & Phonics",
-      "Recognition of words at sight"
-    ]
-  },
-  {
-    domain: "Bridging Processes",
-    class: "bridge",
-    icon: "🔗",
-    strands: [
-      "Fluency",
-      "Vocabulary",
-      "Morphology",
-      "Strategy Use"
-    ]
-  },
-  {
-    domain: "Comprehension",
-    class: "comp",
-    icon: "📖",
-    strands: [
-      "Background and Content Knowledge",
-      "Structures and Features of Text",
-      "Language Structure (syntax, semantics)"
-    ]
-  },
-  {
-    domain: "Writing",
-    class: "write",
-    icon: "✏️",
-    strands: [
-      "Transcription (Handwriting, Spelling, Punctuation)",
-      "Composition (Structure, Organization, Genres, Ideas, Process, Audience, Purpose)"
-    ]
-  },
-  {
-    domain: "Talk",
-    class: "talk",
-    icon: "🗣",
-    strands: [
-      "Exploratory Talk 🧠",
-      "Presentational Talk 🎤"
-    ]
-  }
+  { domain: "Word Recognition", class: "word", icon: "🔤", strands: ["Phonemic Awareness & Phonics", "Sight Word Recognition"] },
+  { domain: "Bridging Processes", class: "bridge", icon: "🔗", strands: ["Fluency", "Vocabulary", "Morphology", "Strategy Use"] },
+  { domain: "Comprehension", class: "comp", icon: "📖", strands: ["Background Knowledge", "Text Structures", "Language Structures"] },
+  { domain: "Writing", class: "write", icon: "✏️", strands: ["Transcription", "Composition"] },
+  { domain: "Talk", class: "talk", icon: "🗣", strands: ["Exploratory Talk 🧠", "Presentational Talk 🎤"] }
 ];
 
-// ===============================
-// TALK BY GRADE (NEW CONTENT)
-// ===============================
 const talkByGrade = [
   {
     grade: "Kindergarten",
-    exploratory: {
-      points: [
-        "Shares ideas, feelings, needs, and preferences",
-        "Participates in play-based conversations",
-        "Responds using words, gestures, or actions"
-      ],
-      examples: [
-        "Circle time sharing",
-        "Partner talk during centres",
-        "Songs, chants, shared retellings"
-      ]
-    },
-    presentational: {
-      points: [
-        "Shares simple information about self",
-        "Attempts to speak clearly to a small group"
-      ],
-      examples: [
-        "Show-and-tell",
-        "Sharing a personal object",
-        "Oral greeting or thank-you"
-      ]
-    }
+    exploratory: ["Sharing ideas and feelings", "Play-based talk", "Responding with words or gestures"],
+    exploratoryExamples: ["Circle time talk", "Songs and chants"],
+    presentational: ["Speaking clearly to a group", "Sharing simple information"],
+    presentationalExamples: ["Show-and-tell", "Oral greetings"]
   },
   {
     grade: "Grade 4",
-    exploratory: {
-      points: [
-        "Sustains discussion to co-construct meaning",
-        "Uses talk to plan and problem-solve",
-        "Responds thoughtfully to peers"
-      ],
-      examples: [
-        "Inquiry discussions",
-        "Planning tasks with peers"
-      ]
-    },
-    presentational: {
-      points: [
-        "Plans and conducts interviews",
-        "Adjusts language for purpose and audience",
-        "Organizes information for presentation"
-      ],
-      examples: [
-        "Student interviews",
-        "Presenting interview findings",
-        "Explaining how something works"
-      ]
-    }
+    exploratory: ["Sustaining discussion", "Planning with talk"],
+    exploratoryExamples: ["Inquiry discussions"],
+    presentational: ["Interviewing", "Presenting gathered information"],
+    presentationalExamples: ["Student interviews", "Interview reports"]
   }
 ];
 
-// ===============================
-// RENDER FUNCTIONS
-// ===============================
 function renderOverview() {
-  const grid = document.getElementById("overviewGrid");
-  if (!grid) return;
-  grid.innerHTML = "";
-
-  framework.forEach(section => {
-    const card = document.createElement("div");
-    card.className = `card ${section.class}`;
-
-    card.innerHTML = `
-      <div class="domain-header">
-        <span class="icon">${section.icon}</span>
-        ${section.domain}
-      </div>
-      <ul>${section.strands.map(s => `<li>${s}</li>`).join("")}</ul>
-    `;
-
-    grid.appendChild(card);
+  const g = document.getElementById("overviewGrid");
+  framework.forEach(f => {
+    g.innerHTML += `
+      <div class="card ${f.class}">
+        <div class="domain-header">${f.icon} ${f.domain}</div>
+        <ul>${f.strands.map(s=>`<li>${s}</li>`).join("")}</ul>
+      </div>`;
   });
 }
 
 function renderSkills() {
-  const grid = document.getElementById("skillsGrid");
-  if (!grid) return;
-  grid.innerHTML = "";
-
-  framework.forEach(section => {
-    section.strands.forEach(strand => {
-      const card = document.createElement("div");
-      card.className = `card ${section.class}`;
-      card.innerHTML = `
-        <div class="domain-header">
-          <span class="icon">${section.icon}</span>
-          ${strand}
-        </div>
-        <div style="font-size:0.8rem;color:#555;">${section.domain}</div>
-      `;
-      grid.appendChild(card);
+  const g = document.getElementById("skillsGrid");
+  framework.forEach(f => {
+    f.strands.forEach(s => {
+      g.innerHTML += `
+        <div class="card ${f.class}">
+          <div class="domain-header">${f.icon} ${s}</div>
+          <div class="small">${f.domain}</div>
+        </div>`;
     });
   });
 }
 
-function renderGradeView() {
-  const gradeView = document.getElementById("grade");
-  if (!gradeView) return;
-  gradeView.innerHTML = "";
+function renderGrades() {
+  const g = document.getElementById("gradeGrid");
+  talkByGrade.forEach(t => {
+    g.innerHTML += `
+      <div class="card talk">
+        <div class="domain-header">🗣 ${t.grade} – Talk</div>
 
-  talkByGrade.forEach(g => {
-    const card = document.createElement("div");
-    card.className = "card talk";
+        <strong>🧠 Exploratory Talk</strong>
+        <ul>${t.exploratory.map(x=>`<li>${x}</li>`).join("")}</ul>
+        <div class="small"><strong>Examples:</strong> ${t.exploratoryExamples.join(", ")}</div>
 
-    card.innerHTML = `
-      <div class="domain-header">
-        <span class="icon">🗣</span>
-        ${g.grade} – Talk
-      </div>
+        <hr>
 
-      <strong>🧠 Exploratory Talk</strong>
-      <ul>${g.exploratory.points.map(p => `<li>${p}</li>`).join("")}</ul>
-      <div style="font-size:0.8rem;color:#555;"><strong>Examples:</strong> ${g.exploratory.examples.join(", ")}</div>
-
-      <hr>
-
-      <strong>🎤 Presentational Talk</strong>
-      <ul>${g.presentational.points.map(p => `<li>${p}</li>`).join("")}</ul>
-      <div style="font-size:0.8rem;color:#555;"><strong>Examples:</strong> ${g.presentational.examples.join(", ")}</div>
-    `;
-
-    gradeView.appendChild(card);
+        <strong>🎤 Presentational Talk</strong>
+        <ul>${t.presentational.map(x=>`<li>${x}</li>`).join("")}</ul>
+        <div class="small"><strong>Examples:</strong> ${t.presentationalExamples.join(", ")}</div>
+      </div>`;
   });
 }
 
-// ===============================
-// TAB CONTROL (SAFE VERSION)
-// ===============================
-function showView(viewId, el) {
-  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
-  document.getElementById(viewId).classList.add("active");
-
-  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-  if (el) el.classList.add("active");
+function showView(id, el) {
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  el.classList.add("active");
 }
 
-// ===============================
-// INITIAL LOAD
-// ===============================
 renderOverview();
 renderSkills();
-renderGradeView();
-showView("overview");
+renderGrades();
 </script>
+
+</body>
+</html>
 ``
