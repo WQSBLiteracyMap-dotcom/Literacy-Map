@@ -1,123 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>WQSB Literacy Scope and Sequence</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<title>WQSB Literacy Map – Talk Domains</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-/* ---------- VARIABLES ---------- */
-:root{
-  --primary:#1fa2c1;
-  --secondary:#4cc9f0;
-  --ink:#2b2b2b;
-  --muted:#666;
-  --bg:#f6f8fa;
+/* =======================
+   DESIGN VARIABLES
+======================= */
+:root {
+  --primary: #1fa2c1;
+  --secondary: #4cc9f0;
+  --ink: #2b2b2b;
+  --muted: #666;
+  --bg: #f6f8fa;
 }
 
-/* ---------- BASE ---------- */
-body{
-  margin:0;
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-  background:var(--bg);
-  color:var(--ink);
+/* =======================
+   BASE
+======================= */
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
 }
 
-h1,h2,h3{
-  font-weight:600;
+h1, h2, h3 {
+  font-weight: 600;
 }
 
-h1{
-  font-size:1.6rem;
+h1 {
+  font-size: 1.7rem;
 }
 
-h2{
-  margin-top:2rem;
-  border-bottom:3px solid var(--primary);
-  padding-bottom:.3rem;
+h2 {
+  margin-top: 3rem;
+  padding-bottom: .3rem;
+  border-bottom: 4px solid var(--primary);
 }
 
-h3{
-  margin-top:1.5rem;
-  color:var(--primary);
+h3 {
+  margin-top: 2rem;
+  color: var(--primary);
 }
 
-p{
-  margin:.3rem 0;
+p {
+  margin: .4rem 0;
 }
 
-/* ---------- HEADER ---------- */
-header{
-  background:white;
-  border-bottom:1px solid #ddd;
-  padding:1rem 2rem;
+/* =======================
+   HEADER
+======================= */
+header {
+  background: white;
+  border-bottom: 1px solid #ddd;
+  padding: 1.2rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-header img{
-  height:60px;
+header img {
+  height: 60px;
 }
 
-/* ---------- NAV ---------- */
-nav{
-  display:flex;
-  gap:1rem;
-  background:white;
-  padding:.8rem 2rem;
-  border-bottom:1px solid #ddd;
+/* =======================
+   CONTROLS
+======================= */
+.controls {
+  background: white;
+  border-bottom: 1px solid #ddd;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  align-items: center;
 }
 
-button{
-  border:none;
-  background:none;
-  font-size:.95rem;
-  cursor:pointer;
-  padding:.4rem .8rem;
-  border-radius:6px;
+.controls strong {
+  font-size: .9rem;
 }
 
-button.active{
-  background:var(--primary);
-  color:white;
+.controls label {
+  font-size: .9rem;
+  cursor: pointer;
 }
 
-/* ---------- LAYOUT ---------- */
-main{
-  max-width:1200px;
-  margin:auto;
-  padding:2rem;
+button {
+  border: none;
+  background: var(--primary);
+  color: white;
+  padding: .4rem .8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: .85rem;
 }
 
-.view{
-  display:none;
+/* =======================
+   LAYOUT
+======================= */
+main {
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem;
 }
 
-.view.active{
-  display:block;
+/* =======================
+   GRADE SECTIONS
+======================= */
+.grade {
+  margin-bottom: 3rem;
 }
 
-/* ---------- TABLE ---------- */
-table{
-  border-collapse:collapse;
-  width:100%;
-  margin-top:1rem;
-  background:white;
+.domain {
+  margin-top: 1.3rem;
+  padding-left: 1rem;
+  border-left: 4px solid var(--secondary);
 }
 
-th,td{
-  border:1px solid #ccc;
-  padding:.6rem;
-  vertical-align:top;
+.domain.presentational {
+  border-left-color: var(--primary);
 }
 
-th{
-  background:#eef7fa;
+/* =======================
+   VISIBILITY TOGGLES
+======================= */
+.hide {
+  display: none;
 }
 
-/* ---------- PRINT ---------- */
-@media print{
-  nav{display:none;}
-  body{background:white;}
-  main{padding:0;}
+/* =======================
+   PRINT
+======================= */
+@media print {
+  .controls { display: none; }
+  body { background: white; }
+  main { padding: 0; }
 }
 </style>
 </head>
@@ -125,106 +146,213 @@ th{
 <body>
 
 <header>
-  <img src="logo.png" alt="WQSB Literacy" />
+  <!-- Replace src with correct logo path -->
+  <img src="logo.png" alt="WQSB Literacy">
+  <h1>Talk Domains – Scope and Sequence</h1>
 </header>
 
-<nav>
-  <button class="active" onclick="showView('grade',this)">By Grade</button>
-  <button onclick="showView('strand',this)">By Strand</button>
-  <button onclick="showView('all',this)">All Expectations</button>
+<div class="controls">
+  <strong>Domains:</strong>
+  <label><input type="checkbox" checked onchange="toggleDomain('exploratory')"> Exploratory Talk</label>
+  <label><input type="checkbox" checked onchange="toggleDomain('presentational')"> Presentational Talk</label>
+
+  <strong>Grades:</strong>
+  <label><input type="checkbox" checked onchange="toggleGrade('1')"> Gr 1</label>
+  <label><input type="checkbox" checked onchange="toggleGrade('2')"> Gr 2</label>
+  <label><input type="checkbox" checked onchange="toggleGrade('3')"> Gr 3</label>
+  <label><input type="checkbox" checked onchange="toggleGrade('4')"> Gr 4</label>
+  <label><input type="checkbox" checked onchange="toggleGrade('5')"> Gr 5</label>
+  <label><input type="checkbox" checked onchange="toggleGrade('6')"> Gr 6</label>
+
   <button onclick="window.print()">Print</button>
-</nav>
+</div>
 
 <main>
 
-<!-- ================= BY GRADE ================= -->
-<section id="grade" class="view active">
-<h2>Talk – By Grade</h2>
+<!-- =======================
+   GRADE 1
+======================= -->
+<section class="grade grade-1">
+<h2>Grade 1</h2>
 
-<h3>Grade 1 – Exploratory Talk</h3>
-<p><strong>Uses talk to explore learning and thinking</strong>→ Thinks aloud during problem solving.</p>
-<p><strong>Shares opinions and simple explanations</strong>→ Uses “I think…” or “Because…”</p>
-<p><strong>Participates in partner and small‑group discussions</strong>→ Turn‑and‑talks, guided group talk.</p>
-<p><strong>Asks questions to clarify understanding</strong>→ “Why?” “How did you know?”</p>
-<p><strong>Reflects on self as a speaker and listener (with guidance)</strong>→ “I listened.” “I spoke louder.”</p>
+<div class="domain exploratory">
+<h3>Exploratory Talk</h3>
+<p><strong>Uses talk to explore learning and thinking</strong> → Thinks aloud during problem solving.</p>
+<p><strong>Shares opinions and simple explanations</strong> → Uses “I think…” or “Because…”</p>
+<p><strong>Participates in partner and small‑group discussions</strong> → Turn‑and‑talks, guided group talk.</p>
+<p><strong>Asks questions to clarify understanding</strong> → “Why?” “How did you know?”</p>
+<p><strong>Reflects on self as a speaker and listener (with guidance)</strong> → “I listened.” “I spoke louder.”</p>
+</div>
 
-<h3>Grade 1 – Presentational Talk</h3>
-<p><strong>Retells stories or experiences in sequence</strong>→ Uses “first, then, last.”</p>
-<p><strong>Delivers short, rehearsed messages</strong>→ Practices before sharing.</p>
-<p><strong>Uses basic voice control and gestures</strong>→ Faces audience; uses hands naturally.</p>
-
-<hr>
-
-<h3>Grade 4 – Presentational Talk (Signature Context: Interviewing)</h3>
-<p><strong>Plans and conducts interviews</strong>→ Interviews peers, adults, or characters.</p>
-<p><strong>Asks purposeful questions</strong>→ Questions aligned with topic and goal.</p>
-<p><strong>Adjusts tone, language, and register</strong>→ Polite, clear interview language.</p>
-<p><strong>Organizes information for oral presentation</strong>→ Summarizes findings clearly.</p>
-
+<div class="domain presentational">
+<h3>Presentational Talk</h3>
+<p><strong>Retells stories or experiences in sequence</strong> → Uses “first, then, last.”</p>
+<p><strong>Delivers short, rehearsed messages</strong> → Practices before sharing.</p>
+<p><strong>Uses basic voice control and gestures</strong> → Faces audience; uses hands naturally.</p>
+<p><strong>Examples of Presentational Talk (POL‑aligned):</strong></p>
+<p>Show‑and‑tell</p>
+<p>Oral retelling of a story or experience</p>
+<p>Sharing favourite books or activities</p>
+<p>Simple oral reports about classroom or family experiences</p>
+</div>
 </section>
 
-<!-- ================= BY STRAND ================= -->
-<section id="strand" class="view">
-<h2>Presentational Talk – All Grades</h2>
+<!-- =======================
+   GRADE 2
+======================= -->
+<section class="grade grade-2">
+<h2>Grade 2</h2>
 
-<p><strong>Grade 1:</strong> Retells stories or experiences in sequence → Uses “first, then, last.”</p>
-<p><strong>Grade 2:</strong> Prepares short oral presentations → Presents learning from reading or inquiry.</p>
-<p><strong>Grade 3:</strong> Delivers short, structured presentations → Shares prepared information clearly.</p>
-<p><strong>Grade 4:</strong> Signature Context: Interviewing</p>
-<p><strong>Grade 5:</strong> Signature Context: Explaining Mathematical and Scientific Thinking</p>
-<p><strong>Grade 6:</strong> Signature Context: Explaining Processes and Reasoning</p>
+<div class="domain exploratory">
+<h3>Exploratory Talk</h3>
+<p><strong>Builds on others’ ideas during discussion</strong> → “I agree because…” “That reminds me…”</p>
+<p><strong>Uses talk to explain thinking and problem solve</strong> → Explains reasoning in math or inquiry.</p>
+<p><strong>Asks relevant questions</strong> → Questions connect directly to topic.</p>
+<p><strong>Participates consistently in group talk</strong> → Contributes regularly.</p>
+<p><strong>Identifies emerging talk strategies</strong> → Notices what helps discussion work.</p>
+</div>
+
+<div class="domain presentational">
+<h3>Presentational Talk</h3>
+<p><strong>Prepares short oral presentations</strong> → Presents learning from reading or inquiry.</p>
+<p><strong>Organizes talk with a beginning and ending</strong> → Introduces topic; gives conclusion.</p>
+<p><strong>Uses visuals to support meaning</strong> → Refers to drawings or charts.</p>
+<p><strong>Adjusts language slightly for audience and purpose</strong> → More formal whole‑class language.</p>
+<p><strong>Examples of Presentational Talk (POL‑aligned):</strong></p>
+<p>Short oral reports on a topic of interest</p>
+<p>Descriptive reports about an event or observation</p>
+<p>Book talks</p>
+<p>Explaining how something was done (simple procedures)</p>
+</div>
 </section>
 
-<!-- ================= ALL TABLE ================= -->
-<section id="all" class="view">
-<h2>All Talk Expectations</h2>
+<!-- =======================
+   GRADE 3
+======================= -->
+<section class="grade grade-3">
+<h2>Grade 3</h2>
 
-<table>
-<tr>
-<th>Strand</th>
-<th>Grade 1</th>
-<th>Grade 2</th>
-<th>Grade 3</th>
-<th>Grade 4</th>
-<th>Grade 5</th>
-<th>Grade 6</th>
-</tr>
+<div class="domain exploratory">
+<h3>Exploratory Talk</h3>
+<p><strong>Explores multiple ideas and viewpoints</strong> → Considers different answers in discussion.</p>
+<p><strong>Builds, clarifies, and reshapes ideas through talk</strong> → Revises thinking after hearing peers.</p>
+<p><strong>Explains reasoning with simple justification</strong> → Supports opinions with examples.</p>
+<p><strong>Responds directly to peers’ ideas</strong> → Refers to what others said.</p>
+</div>
 
-<tr>
-<td>Exploratory Talk</td>
-<td>Uses talk to explore learning and thinking</td>
-<td>Builds on others’ ideas during discussion</td>
-<td>Explores multiple ideas and viewpoints</td>
-<td>Sustains discussion to co‑construct meaning</td>
-<td>Engages in sustained academic dialogue</td>
-<td>Leads and participates in sustained inquiry discussions</td>
-</tr>
+<div class="domain presentational">
+<h3>Presentational Talk</h3>
+<p><strong>Delivers short, structured presentations</strong> → Shares prepared information clearly.</p>
+<p><strong>Uses subject‑appropriate vocabulary</strong> → Science, math, social studies terms.</p>
+<p><strong>Begins adjusting register for different contexts</strong> → Different language for report vs sharing.</p>
+<p><strong>Examples of Presentational Talk (POL‑aligned):</strong></p>
+<p>Oral reports based on reading or inquiry</p>
+<p>Book talks and chapter summaries</p>
+<p>Explaining a process or decision</p>
+<p>Presenting findings from research or observation</p>
+</div>
+</section>
 
-<tr>
-<td>Presentational Talk</td>
-<td>Retells stories or experiences</td>
-<td>Prepares short oral presentations</td>
-<td>Delivers short, structured presentations</td>
-<td>Signature Context: Interviewing</td>
-<td>Explaining Mathematical and Scientific Thinking</td>
-<td>Explaining Processes and Reasoning</td>
-</tr>
+<!-- =======================
+   GRADE 4
+======================= -->
+<section class="grade grade-4">
+<h2>Grade 4</h2>
 
-</table>
+<div class="domain exploratory">
+<h3>Exploratory Talk</h3>
+<p><strong>Sustains discussion to co‑construct meaning</strong> → Extends ideas over multiple turns.</p>
+<p><strong>Uses talk to plan, reflect, and problem solve</strong> → Discusses next steps before acting.</p>
+<p><strong>Considers and responds to peers’ viewpoints</strong> → Acknowledges different perspectives.</p>
+<p><strong>Participates confidently in collaborative talk</strong> → Speaks without prompting.</p>
+</div>
+
+<div class="domain presentational">
+<h3>Presentational Talk (Signature Context: Interviewing)</h3>
+<p><strong>Plans and conducts interviews</strong> → Interviews peers, adults, or characters.</p>
+<p><strong>Asks purposeful questions</strong> → Questions aligned with topic and goal.</p>
+<p><strong>Adjusts tone, language, and register</strong> → Polite, clear interview language.</p>
+<p><strong>Organizes information for oral presentation</strong> → Summarizes findings clearly.</p>
+<p><strong>Examples of Presentational Talk (POL‑aligned):</strong></p>
+<p>Interviews (peer, adult, character‑based)</p>
+<p>Oral presentation of interview findings</p>
+<p>Inquiry‑based reports</p>
+<p>Explanations of how something works</p>
+</div>
+</section>
+
+<!-- =======================
+   GRADE 5
+======================= -->
+<section class="grade grade-5">
+<h2>Grade 5</h2>
+
+<div class="domain exploratory">
+<h3>Exploratory Talk</h3>
+<p><strong>Engages in sustained academic dialogue</strong> → Participates in extended inquiry talk.</p>
+<p><strong>Explores multiple perspectives</strong> → Compares viewpoints.</p>
+<p><strong>Uses talk to hypothesize, analyze, and rethink ideas</strong> → Revises thinking with evidence.</p>
+<p><strong>Reflects metacognitively on learning</strong> → Explains how talk supported thinking.</p>
+</div>
+
+<div class="domain presentational">
+<h3>Presentational Talk (Signature Context: Explaining Mathematical and Scientific Thinking)</h3>
+<p><strong>Provides oral explanations of mathematical reasoning</strong> → Explains steps used to solve problems.</p>
+<p><strong>Explains strategies and processes clearly</strong> → Logical, sequenced explanations.</p>
+<p><strong>Uses precise subject‑specific vocabulary</strong> → Accurate math and science terms.</p>
+<p><strong>Responds to questions to clarify understanding</strong> → Rephrases and elaborates.</p>
+<p><strong>Examples of Presentational Talk (POL‑aligned):</strong></p>
+<p>Oral explanations of math reasoning</p>
+<p>Explaining scientific processes or experiments</p>
+<p>Inquiry presentations</p>
+<p>Structured oral reports based on research</p>
+</div>
+</section>
+
+<!-- =======================
+   GRADE 6
+======================= -->
+<section class="grade grade-6">
+<h2>Grade 6</h2>
+
+<div class="domain exploratory">
+<h3>Exploratory Talk</h3>
+<p><strong>Leads and participates in sustained inquiry discussions</strong> → Advances group thinking.</p>
+<p><strong>Challenges and refines ideas respectfully</strong> → Disagrees constructively.</p>
+<p><strong>Adjusts participation role strategically</strong> → Leads, contributes, or listens.</p>
+<p><strong>Reflects independently on communicative growth</strong> → Identifies strengths and needs.</p>
+</div>
+
+<div class="domain presentational">
+<h3>Presentational Talk (Signature Context: Explaining Processes and Reasoning)</h3>
+<p><strong>Explains complex processes step by step</strong> → Clear cause‑and‑effect explanations.</p>
+<p><strong>Justifies conclusions using evidence</strong> → Refers to data and observations.</p>
+<p><strong>Adapts presentation style to the audience</strong> → Clarifies or elaborates as needed.</p>
+<p><strong>Uses rhetorical and organizational strategies intentionally</strong> → Emphasis through pacing and tone.</p>
+<p><strong>Self‑evaluates oral communication and sets goals</strong> → Reflects and plans improvement.</p>
+<p><strong>Examples of Presentational Talk (POL‑aligned):</strong></p>
+<p>Oral explanations of scientific and mathematical processes</p>
+<p>Persuasive presentations or debates for peers</p>
+<p>Inquiry and research presentations</p>
+<p>Public service messages or advocacy speeches</p>
+</div>
 </section>
 
 </main>
 
 <script>
-function showView(id,btn){
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+function toggleDomain(domain) {
+  document.querySelectorAll('.' + domain).forEach(el => {
+    el.classList.toggle('hide');
+  });
+}
 
-  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+function toggleGrade(grade) {
+  document.querySelectorAll('.grade-' + grade).forEach(el => {
+    el.classList.toggle('hide');
+  });
 }
 </script>
 
 </body>
 </html>
-``
