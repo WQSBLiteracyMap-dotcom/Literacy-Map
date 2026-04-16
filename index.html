@@ -1,9 +1,65 @@
 <script>
+// ===============================
+// MAIN FRAMEWORK (Overview + Skills)
+// ===============================
+const framework = [
+  {
+    domain: "Word Recognition",
+    class: "word",
+    icon: "🔤",
+    strands: [
+      "Phonemic Awareness & Phonics",
+      "Recognition of words at sight"
+    ]
+  },
+  {
+    domain: "Bridging Processes",
+    class: "bridge",
+    icon: "🔗",
+    strands: [
+      "Fluency",
+      "Vocabulary",
+      "Morphology",
+      "Strategy Use"
+    ]
+  },
+  {
+    domain: "Comprehension",
+    class: "comp",
+    icon: "📖",
+    strands: [
+      "Background and Content Knowledge",
+      "Structures and Features of Text",
+      "Language Structure (syntax, semantics)"
+    ]
+  },
+  {
+    domain: "Writing",
+    class: "write",
+    icon: "✏️",
+    strands: [
+      "Transcription (Handwriting, Spelling, Punctuation)",
+      "Composition (Structure, Organization, Genres, Ideas, Process, Audience, Purpose)"
+    ]
+  },
+  {
+    domain: "Talk",
+    class: "talk",
+    icon: "🗣",
+    strands: [
+      "Exploratory Talk 🧠",
+      "Presentational Talk 🎤"
+    ]
+  }
+];
+
+// ===============================
+// TALK BY GRADE (NEW CONTENT)
+// ===============================
 const talkByGrade = [
   {
     grade: "Kindergarten",
     exploratory: {
-      icon: "🧠",
       points: [
         "Shares ideas, feelings, needs, and preferences",
         "Participates in play-based conversations",
@@ -12,16 +68,15 @@ const talkByGrade = [
       examples: [
         "Circle time sharing",
         "Partner talk during centres",
-        "Songs, chants, and shared retellings"
+        "Songs, chants, shared retellings"
       ]
     },
     presentational: {
-      icon: "🎤",
       points: [
         "Shares simple information about self",
         "Attempts to speak clearly to a small group"
       ],
-      polExamples: [
+      examples: [
         "Show-and-tell",
         "Sharing a personal object",
         "Oral greeting or thank-you"
@@ -31,17 +86,9 @@ const talkByGrade = [
   {
     grade: "Grade 4",
     exploratory: {
-      icon: "🧠",
       points: [
         "Sustains discussion to co-construct meaning",
         "Uses talk to plan and problem-solve",
         "Responds thoughtfully to peers"
       ],
       examples: [
-        "Collaborative inquiry discussions",
-        "Planning tasks aloud with peers"
-      ]
-    },
-    presentational: {
-      icon: "🎤",
-      points: [
