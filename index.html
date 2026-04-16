@@ -92,3 +92,117 @@ const talkByGrade = [
         "Responds thoughtfully to peers"
       ],
       examples: [
+        "Inquiry discussions",
+        "Planning tasks with peers"
+      ]
+    },
+    presentational: {
+      points: [
+        "Plans and conducts interviews",
+        "Adjusts language for purpose and audience",
+        "Organizes information for presentation"
+      ],
+      examples: [
+        "Student interviews",
+        "Presenting interview findings",
+        "Explaining how something works"
+      ]
+    }
+  }
+];
+
+// ===============================
+// RENDER FUNCTIONS
+// ===============================
+function renderOverview() {
+  const grid = document.getElementById("overviewGrid");
+  if (!grid) return;
+  grid.innerHTML = "";
+
+  framework.forEach(section => {
+    const card = document.createElement("div");
+    card.className = `card ${section.class}`;
+
+    card.innerHTML = `
+      <div class="domain-header">
+        <span class="icon">${section.icon}</span>
+        ${section.domain}
+      </div>
+      <ul>${section.strands.map(s => `<li>${s}</li>`).join("")}</ul>
+    `;
+
+    grid.appendChild(card);
+  });
+}
+
+function renderSkills() {
+  const grid = document.getElementById("skillsGrid");
+  if (!grid) return;
+  grid.innerHTML = "";
+
+  framework.forEach(section => {
+    section.strands.forEach(strand => {
+      const card = document.createElement("div");
+      card.className = `card ${section.class}`;
+      card.innerHTML = `
+        <div class="domain-header">
+          <span class="icon">${section.icon}</span>
+          ${strand}
+        </div>
+        <div style="font-size:0.8rem;color:#555;">${section.domain}</div>
+      `;
+      grid.appendChild(card);
+    });
+  });
+}
+
+function renderGradeView() {
+  const gradeView = document.getElementById("grade");
+  if (!gradeView) return;
+  gradeView.innerHTML = "";
+
+  talkByGrade.forEach(g => {
+    const card = document.createElement("div");
+    card.className = "card talk";
+
+    card.innerHTML = `
+      <div class="domain-header">
+        <span class="icon">🗣</span>
+        ${g.grade} – Talk
+      </div>
+
+      <strong>🧠 Exploratory Talk</strong>
+      <ul>${g.exploratory.points.map(p => `<li>${p}</li>`).join("")}</ul>
+      <div style="font-size:0.8rem;color:#555;"><strong>Examples:</strong> ${g.exploratory.examples.join(", ")}</div>
+
+      <hr>
+
+      <strong>🎤 Presentational Talk</strong>
+      <ul>${g.presentational.points.map(p => `<li>${p}</li>`).join("")}</ul>
+      <div style="font-size:0.8rem;color:#555;"><strong>Examples:</strong> ${g.presentational.examples.join(", ")}</div>
+    `;
+
+    gradeView.appendChild(card);
+  });
+}
+
+// ===============================
+// TAB CONTROL (SAFE VERSION)
+// ===============================
+function showView(viewId, el) {
+  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+  document.getElementById(viewId).classList.add("active");
+
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  if (el) el.classList.add("active");
+}
+
+// ===============================
+// INITIAL LOAD
+// ===============================
+renderOverview();
+renderSkills();
+renderGradeView();
+showView("overview");
+</script>
+``
