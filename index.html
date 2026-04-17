@@ -17,29 +17,42 @@ body {
 header {
   background: #0b525b;
   color: #ffffff;
-  padding: 24px;
+  padding: 32px;
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 32px;
 }
 
 header img {
-  height: 100px;
+  height: 120px;
 }
 
 header h1 {
   margin: 0;
-  font-size: 28px;
+  font-size: 30px;
 }
 
 header p {
-  margin: 4px 0 0;
+  margin: 6px 0 0;
   font-size: 14px;
   color: #d1f1f5;
 }
 
+.top-nav {
+  background: #ffffff;
+  border-bottom: 1px solid #ccc;
+  padding: 16px 24px;
+}
+
+.top-nav button {
+  margin-right: 16px;
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
 main {
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 24px auto;
   padding: 0 24px;
 }
@@ -47,7 +60,7 @@ main {
 section {
   background: #ffffff;
   padding: 24px;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
   border-radius: 10px;
 }
 
@@ -64,12 +77,30 @@ table {
 
 th, td {
   border: 1px solid #ccc;
-  padding: 8px;
+  padding: 10px;
   vertical-align: top;
 }
 
 th {
   background: #eef7fa;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Competency Overviews */
+.cycle-buttons button,
+.competency-buttons button {
+  margin: 6px 10px 6px 0;
+  padding: 8px 12px;
+}
+
+.competency-images img {
+  max-width: 1100px;
+  display: block;
+  margin: 32px auto;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
 }
 </style>
 </head>
@@ -77,31 +108,35 @@ th {
 <body>
 
 <header>
-  <img src="logo.png" alt="Western Quebec School Board Logo">
+  <img src="logo.png" alt="Western Quebec School Board logo">
   <div>
     <h1>Western Quebec School Board Literacy Map</h1>
     <p>Grades 1–6 · English Language Arts</p>
   </div>
 </header>
 
+<div class="top-nav">
+  <button onclick="showMap()">Literacy Map</button>
+  <button onclick="showCompetencies()">Competency Overviews</button>
+</div>
+
 <main>
 
-<!-- =====================================================
-     READING
-===================================================== -->
+<!-- ======================================================
+     LITERACY MAP (STATIC, COMPLETE)
+====================================================== -->
+<div id="literacy-map">
+
+<!-- ================= READING ================= -->
 <section>
 <h2>Reading</h2>
 
 <table>
 <tr>
 <th>Domain</th>
-<th>Sub‑Domain</th>
-<th>Grade 1</th>
-<th>Grade 2</th>
-<th>Grade 3</th>
-<th>Grade 4</th>
-<th>Grade 5</th>
-<th>Grade 6</th>
+<th>Sub-Domain</th>
+<th>Grade 1</th><th>Grade 2</th><th>Grade 3</th>
+<th>Grade 4</th><th>Grade 5</th><th>Grade 6</th>
 </tr>
 
 <tr>
@@ -152,22 +187,16 @@ th {
 </table>
 </section>
 
-<!-- =====================================================
-     WRITING
-===================================================== -->
+<!-- ================= WRITING ================= -->
 <section>
 <h2>Writing</h2>
 
 <table>
 <tr>
 <th>Domain</th>
-<th>Sub‑Domain</th>
-<th>Grade 1</th>
-<th>Grade 2</th>
-<th>Grade 3</th>
-<th>Grade 4</th>
-<th>Grade 5</th>
-<th>Grade 6</th>
+<th>Sub-Domain</th>
+<th>Grade 1</th><th>Grade 2</th><th>Grade 3</th>
+<th>Grade 4</th><th>Grade 5</th><th>Grade 6</th>
 </tr>
 
 <tr>
@@ -190,7 +219,7 @@ th {
 <td></td><td></td><td></td><td></td><td></td><td></td>
 </tr>
 <tr>
-<td>Ideas &amp; Process</td>
+<td>Ideas & Process</td>
 <td></td><td></td><td></td><td></td><td></td><td></td>
 </tr>
 <tr>
@@ -198,19 +227,17 @@ th {
 <td></td><td></td><td></td><td></td><td></td><td></td>
 </tr>
 <tr>
-<td>Syntax, Grammar, &amp; Usage</td>
+<td>Syntax, Grammar, & Usage</td>
 <td></td><td></td><td></td><td></td><td></td><td></td>
 </tr>
 <tr>
-<td>Craft, Audience &amp; Purpose</td>
+<td>Craft, Audience & Purpose</td>
 <td></td><td></td><td></td><td></td><td></td><td></td>
 </tr>
 </table>
 </section>
 
-<!-- =====================================================
-     TALK
-===================================================== -->
+<!-- ================= TALK ================= -->
 <section>
 <h2>Talk</h2>
 
@@ -231,7 +258,7 @@ th {
 <td>
 <strong>Uses talk to explore learning and thinking</strong> → Thinks aloud during problem solving.<br>
 <strong>Shares opinions and simple explanations</strong> → Uses “I think…” or “Because…”<br>
-<strong>Participates in partner and small‑group discussions</strong> → Turn‑and‑talks, guided group talk.<br>
+<strong>Participates in partner and small-group discussions</strong> → Turn-and-talks, guided group talk.<br>
 <strong>Asks questions to clarify understanding</strong> → “Why?” “How did you know?”<br>
 <strong>Reflects on self as a speaker and listener (with guidance)</strong> → “I listened.” “I spoke louder.”
 </td>
@@ -239,37 +266,37 @@ th {
 <td>
 <strong>Builds on others’ ideas during discussion</strong> → “I agree because…” “That reminds me…”<br>
 <strong>Uses talk to explain thinking and problem solve</strong> → Explains reasoning in math or inquiry.<br>
-<strong>Asks relevant questions</strong> → Questions connect directly to topic.<br>
-<strong>Participates consistently in group talk</strong> → Contributes regularly.<br>
-<strong>Identifies emerging talk strategies</strong> → Notices what helps discussion work.
+<strong>Asks relevant questions</strong><br>
+<strong>Participates consistently in group talk</strong><br>
+<strong>Identifies emerging talk strategies</strong>
 </td>
 
 <td>
-<strong>Explores multiple ideas and viewpoints</strong> → Considers different answers in discussion.<br>
-<strong>Builds, clarifies, and reshapes ideas through talk</strong> → Revises thinking after hearing peers.<br>
-<strong>Explains reasoning with simple justification</strong> → Supports opinions with examples.<br>
-<strong>Responds directly to peers’ ideas</strong> → Refers to what others said.
+<strong>Explores multiple ideas and viewpoints</strong><br>
+<strong>Builds, clarifies, and reshapes ideas through talk</strong><br>
+<strong>Explains reasoning with simple justification</strong><br>
+<strong>Responds directly to peers’ ideas</strong>
 </td>
 
 <td>
-<strong>Sustains discussion to co‑construct meaning</strong> → Extends ideas over multiple turns.<br>
-<strong>Uses talk to plan, reflect, and problem solve</strong> → Discusses next steps before acting.<br>
-<strong>Considers and responds to peers’ viewpoints</strong> → Acknowledges different perspectives.<br>
-<strong>Participates confidently in collaborative talk</strong> → Speaks without prompting.
+<strong>Sustains discussion to co-construct meaning</strong><br>
+<strong>Uses talk to plan, reflect, and problem solve</strong><br>
+<strong>Considers and responds to peers’ viewpoints</strong><br>
+<strong>Participates confidently in collaborative talk</strong>
 </td>
 
 <td>
-<strong>Engages in sustained academic dialogue</strong> → Participates in extended inquiry talk.<br>
-<strong>Explores multiple perspectives</strong> → Compares viewpoints.<br>
-<strong>Uses talk to hypothesize, analyze, and rethink ideas</strong> → Revises thinking with evidence.<br>
-<strong>Reflects metacognitively on learning</strong> → Explains how talk supported thinking.
+<strong>Engages in sustained academic dialogue</strong><br>
+<strong>Explores multiple perspectives</strong><br>
+<strong>Uses talk to hypothesize, analyze, and rethink ideas</strong><br>
+<strong>Reflects metacognitively on learning</strong>
 </td>
 
 <td>
-<strong>Leads and participates in sustained inquiry discussions</strong> → Advances group thinking.<br>
-<strong>Challenges and refines ideas respectfully</strong> → Disagrees constructively.<br>
-<strong>Adjusts participation role strategically</strong> → Leads, contributes, or listens.<br>
-<strong>Reflects independently on communicative growth</strong> → Identifies strengths and needs.
+<strong>Leads and participates in sustained inquiry discussions</strong><br>
+<strong>Challenges and refines ideas respectfully</strong><br>
+<strong>Adjusts participation role strategically</strong><br>
+<strong>Reflects independently on communicative growth</strong>
 </td>
 </tr>
 
@@ -277,50 +304,104 @@ th {
 <td><strong>Presentational Talk</strong></td>
 
 <td>
-<strong>Retells stories or experiences in sequence</strong> → Uses “first, then, last.”<br>
-<strong>Delivers short, rehearsed messages</strong> → Practices before sharing.<br>
-<strong>Uses basic voice control and gestures</strong> → Faces audience; uses hands naturally.<br>
-<strong>Examples:</strong> Show‑and‑tell; oral retelling; sharing favourite books; simple oral reports
+<strong>Retells stories or experiences in sequence</strong><br>
+<strong>Delivers short, rehearsed messages</strong><br>
+<strong>Uses basic voice control and gestures</strong><br>
+<strong>Examples:</strong> Show-and-tell; oral retelling; simple oral reports
 </td>
 
 <td>
-<strong>Prepares short oral presentations</strong> → Presents learning from reading or inquiry.<br>
-<strong>Organizes talk with a beginning and ending</strong> → Introduces topic; gives conclusion.<br>
-<strong>Uses visuals to support meaning</strong> → Refers to drawings or charts.<br>
-<strong>Adjusts language slightly for audience and purpose</strong><br>
-<strong>Examples:</strong> Short oral reports; descriptive reports; book talks; explaining procedures
+<strong>Prepares short oral presentations</strong><br>
+<strong>Organizes talk with beginning and ending</strong><br>
+<strong>Uses visuals to support meaning</strong><br>
+<strong>Examples:</strong> Book talks; explaining procedures
 </td>
 
 <td>
 <strong>Delivers short, structured presentations</strong><br>
-<strong>Uses subject‑appropriate vocabulary</strong><br>
-<strong>Begins adjusting register for different contexts</strong><br>
-<strong>Examples:</strong> Oral reports; book talks; explaining a process; presenting findings
+<strong>Uses subject-appropriate vocabulary</strong><br>
+<strong>Examples:</strong> Oral reports; presenting findings
 </td>
 
 <td>
 <strong>Signature Context: Interviewing</strong><br>
-Plans and conducts interviews; asks purposeful questions; adjusts tone and register; organizes information<br>
-<strong>Examples:</strong> Interviews; oral presentation of findings; inquiry‑based reports
+<strong>Examples:</strong> Interviews; inquiry-based reports
 </td>
 
 <td>
 <strong>Signature Context: Explaining Mathematical and Scientific Thinking</strong><br>
-Explains mathematical reasoning; uses precise vocabulary; responds to questions<br>
-<strong>Examples:</strong> Oral explanations; inquiry presentations; structured reports
+<strong>Examples:</strong> Oral explanations; structured reports
 </td>
 
 <td>
 <strong>Signature Context: Explaining Processes and Reasoning</strong><br>
-Explains complex processes; justifies conclusions; adapts presentation style<br>
-<strong>Examples:</strong> Persuasive presentations; inquiry presentations; advocacy speeches
+<strong>Examples:</strong> Persuasive presentations; advocacy speeches
 </td>
 </tr>
 
 </table>
 </section>
 
+</div>
+
+<!-- ======================================================
+     COMPETENCY OVERVIEWS
+====================================================== -->
+<div id="competency-overviews" class="hidden">
+
+<section>
+<h2>Competency Overviews</h2>
+
+<div class="cycle-buttons">
+<button onclick="selectCycle(1)">Cycle 1</button>
+<button onclick="selectCycle(2)">Cycle 2</button>
+<button onclick="selectCycle(3)">Cycle 3</button>
+</div>
+
+<div class="competency-buttons hidden" id="competency-buttons">
+<button onclick="loadCompetency('reading')">Reading</button>
+<button onclick="loadCompetency('talk')">Talk</button>
+<button onclick="loadCompetency('writing')">Writing</button>
+</div>
+
+<div class="competency-images" id="competency-images"></div>
+
+</section>
+
+</div>
+
 </main>
+
+<script>
+let currentCycle = null;
+
+function showMap() {
+  document.getElementById('literacy-map').classList.remove('hidden');
+  document.getElementById('competency-overviews').classList.add('hidden');
+}
+
+function showCompetencies() {
+  document.getElementById('literacy-map').classList.add('hidden');
+  document.getElementById('competency-overviews').classList.remove('hidden');
+}
+
+function selectCycle(cycle) {
+  currentCycle = cycle;
+  document.getElementById('competency-buttons').classList.remove('hidden');
+  document.getElementById('competency-images').innerHTML = '';
+}
+
+function loadCompetency(type) {
+  const container = document.getElementById('competency-images');
+  container.innerHTML = '';
+  for (let i = 1; i <= 10; i++) {
+    const img = document.createElement('img');
+    img.src = `competency-overviews/cycle${currentCycle}-${type}-${i}.png`;
+    img.onerror = () => img.remove();
+    container.appendChild(img);
+  }
+}
+</script>
 
 </body>
 </html>
